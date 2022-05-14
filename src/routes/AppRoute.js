@@ -9,6 +9,7 @@ import {
 import { GetAllHeroes } from '../components/GetAllHeroes';
 import { Main } from '../components/Main';
 import { Nav } from '../components/Nav'
+import { SearchHero } from '../components/SearchHero';
 
 export const AppRoute = () => {
     return (
@@ -20,6 +21,7 @@ export const AppRoute = () => {
                     
                     <Routes>
                         <Route exact path="/heroes" element={<GetAllHeroes />}> </Route>
+                        <Route  exact path='/search' element={<SearchHero />}></Route>
                         <Route exact path='/' element={<Main/>}> </Route>
                         
                     </Routes>

@@ -1,20 +1,22 @@
 import React from 'react'
 
-export const Heroes = (props) => {
+import '../styles/card.css'
 
+export const Heroes = ({ idCategory, superHero, publisher, character, age }) => {
 
-    return (
+    return (        
 
-
-        <div class="card" style="width: 18rem;">
-            <img src="" class="card-img-top" alt="..." />
-            <div class="card-body">
-                <h5 class="card-title">{props.superHero}</h5>
-                <p class="card-text">{props.publisher}</p>
-                <p class="card-text">{props.character}</p>
-                <p class="card-text">{props.age}</p>
-            </div>
-        </div>
+            <div className="card ms-3  mt-3  w-25  "  >
+                <img src={require(`../../public/img/${idCategory}.jpg`)} className="card-img-top w-100 h-50" alt="superman" />          
+                     
+                <div className="card-body ">
+                    <h5 className="card-title"> Bando: {idCategory}</h5>
+                    <h5 className="card-title">Super Heroe: {superHero}</h5>
+                    <p className="card-text"> Publicador: {publisher.toUpperCase()}</p>
+                    <p className="card-text"> Personaje: {character.toUpperCase()}</p>
+                    <p className="card-text"> Edad: {age}</p>                   
+                </div>
+            </div>      
 
     )
 }
