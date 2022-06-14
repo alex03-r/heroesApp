@@ -3,10 +3,33 @@
 .heroCard { 
 
     width:1000px !important;
-    height: 200px !important;
+    height: 100px !important;
     cursor: pointer;
   
 
 }
 
+.btnClose{
+
+    position: absolute !important;
+}
+
+.img {
+
+    width: 30px;
+    height: 30px;
+   position: absolute;
+   right: 6px;
+   color: white;
+    
+}
+
+.imgHero{
+    width: 100% !important;
+}
+
+
+.navar{
+    width: 100% !important;
+}
 

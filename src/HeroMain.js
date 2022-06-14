@@ -10,10 +10,9 @@ export const HeroMain = () => {
 
   return (
 
+    //mongodb://localhost:27017/test?replicaSet=atlas-326ku7-shard-0&readPreference=primary&authSource=admin&appname=MongoDB%20Compass&ssl=true
 
-    <div className='container  '>
-
-
+    <div >
       <AppRoute/>
     </div>
 

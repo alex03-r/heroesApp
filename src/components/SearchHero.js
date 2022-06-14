@@ -9,7 +9,6 @@ export const SearchHero = () => {
     const [filterHero, setfilterHero] = useState([])
 
     const getHeroByName = async () => {
-
         const response = await fetch('http://localhost:4000/api')
         const { allHeroes } = await response.json()
         setfilterHero(allHeroes)
@@ -24,7 +23,6 @@ export const SearchHero = () => {
         setsearch(e.target.value)
     }
 
-
     const [heroFilterResult, setHeroFilterResult] = useState([])
 
     const loopFor = () => {
@@ -35,7 +33,6 @@ export const SearchHero = () => {
         setHeroFilterResult(filterResult)
     }
 
-
     return (
 
         <div>
@@ -44,14 +41,12 @@ export const SearchHero = () => {
             <input type='text' className='form-control' onKeyUp={loopFor} onChange={handleSearch} value={search} placeholder='hero name' />
 
             <div className='row heroCard'>
-                {             
-               
+                {
                     heroFilterResult.map((hero) => (
                         <Heroes
                             key={hero.idCategory}
                             {...hero}
-                        />))           
-
+                        />))
                 }
             </div>
         </div>
