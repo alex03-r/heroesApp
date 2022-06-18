@@ -1,8 +1,8 @@
 import React, { useRef } from 'react'
 
-export const Alert = ({name, type = 'info'}) => {
+export const Alert = ({ name, type = 'info' }) => {
 
-    const alertRef = useRef('') 
+    const alertRef = useRef('')
 
     let message = ''
 
@@ -12,20 +12,21 @@ export const Alert = ({name, type = 'info'}) => {
 
     } else if (type === 'danger') {
 
-         message = `The hero ${name} has been deleted succesfuly`;
+        message = `The hero ${name} has been deleted succesfuly`;
 
-    }else if(type === 'info'){
+    } else if (type === 'info') {
 
         message = `The hero ${name} has been updated succesfuly`;
 
+    } else if(type === 'warning'){
+
+        message = 'There is no hero added yet'
     }
 
     return (
 
         <div ref={alertRef} className={`alert alert-${type} text-center alert-dismissible" role="alert" `}>
-
-            {alertRef.current = message }
-
+            {alertRef.current = message}
         </div>
 
     )

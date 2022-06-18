@@ -72,6 +72,7 @@ export const Form = () => {
 
   return (
 
+  
     <div className='container w-75 justify-content-center'>
 
       {showAlert ? <Alert  name={superHero} type={'success'} /> : null}

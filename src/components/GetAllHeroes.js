@@ -12,7 +12,7 @@ export const GetAllHeroes = () => {
 
   const [showAlert, setshowAlert] = useState(false)
   const [heroId, setheroId] = useState('')
-  
+
   //react-hero
   const getHeroes = async () => {
 
@@ -26,9 +26,12 @@ export const GetAllHeroes = () => {
 
   useEffect(() => {
 
-    getHeroes()
+    getHeroes();
+
+  
 
   }, [heroes])
+
 
 
   let index
@@ -50,38 +53,36 @@ export const GetAllHeroes = () => {
     setTimeout(() => {
 
       setshowAlert(false)
-
-
     }, 3000)
 
   }
 
   return (
 
-    <div className='ms-5' >
+    <div className='containerHeroes' >
 
-      <h1 className='mt-2 ' >All Heros</h1>
-      
+      <h1 className='mt-1'>All Hereos</h1>
+
       {showAlert ? <Alert name={heroId} type={'danger'} /> : null}
 
-      <div className='row heroCard  mb-5'> {
+      {  heroes.length == 0 ?  <Alert type={'warning'} />   :  null     }
 
-        heroes.map((hero) => (
+          <div className='row heroCard'>
+            {
+              heroes.map((hero) => (
+                <Heroes
 
-          <Heroes
+                  key={hero.idCategory}
 
-            key={hero.idCategory}
+                  {...hero}
 
-            {...hero}
+                  handleDeleteByID={handleDeleteByID}
 
-            handleDeleteByID={handleDeleteByID}
+                />))
 
-          />))
+            }
 
-      }
-      
-      </div>
-
+          </div>
     </div>
   )
 }

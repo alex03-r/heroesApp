@@ -35,20 +35,23 @@ export const SearchHero = () => {
 
     return (
 
-        <div>
+        <div className='containerSearch'>
 
             <h1>Search Hero</h1>
             <input type='text' className='form-control' onKeyUp={loopFor} onChange={handleSearch} value={search} placeholder='hero name' />
 
-            <div className='row heroCard'>
-                {
-                    heroFilterResult.map((hero) => (
-                        <Heroes
-                            key={hero.idCategory}
-                            {...hero}
-                        />))
-                }
-            </div>
+            {search.length > 0 ?
+                <div className='row heroCard'>
+                    {
+                        heroFilterResult.map((hero) => (
+                            <Heroes
+                                key={hero.idCategory}
+                                {...hero}
+                            />))
+                    }
+                </div>
+                : null
+            }
         </div>
     )
 }
