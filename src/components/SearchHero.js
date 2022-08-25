@@ -45,7 +45,7 @@ export const SearchHero = () => {
                     {
                         heroFilterResult.map((hero) => (
                             <Heroes
-                                key={hero.idCategory}
+                                key={hero._id}
                                 {...hero}
                             />))
                     }

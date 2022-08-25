@@ -20,7 +20,7 @@ export const HeroUpdate = () => {
         getHeroesToUpdate();
     }, [])
 
-    const { idCategory, superHero, publisher, character, age } = heroByid;
+    const { superHero, publisher, character, age } = heroByid;
 
     const handleInputUpdate = (e) => {
         setheroByid({
@@ -59,8 +59,8 @@ export const HeroUpdate = () => {
 
             { showalert ? <Alert name={superHero} type={'info'} /> : null}
 
-            <label for='hero' className='form-label'>Id Of category</label>
-            <input type='text' onChange={handleInputUpdate} value={idCategory} placeholder='new' name='idCategory' className='form-control' />
+            {/* <label for='hero' className='form-label'>Id Of category</label>
+            <input type='text' onChange={handleInputUpdate} value={idCategory} placeholder='new' name='idCategory' className='form-control' /> */}
 
             <label for='hero' className='form-label'>Super Hero</label>
             <input type='text' onChange={handleInputUpdate} value={superHero} name='superHero' className='form-control' />

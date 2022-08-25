@@ -1,10 +1,11 @@
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useLayoutEffect, useContext } from 'react'
 import { Heroes } from './Heroes';
 import { deleteHero } from '../helper/deleteHero';
 
 import '../styles/card.css'
 import { Alert } from './Alert';
+import { HeroContex } from '../contex/HeroContex';
 
 
 export const GetAllHeroes = () => {
@@ -12,6 +13,9 @@ export const GetAllHeroes = () => {
 
   const [showAlert, setshowAlert] = useState(false)
   const [heroId, setheroId] = useState('')
+  const [heroes, setHero] = useState([])
+
+  // const { first } = useContext( HeroContex )
 
   //react-hero
   const getHeroes = async () => {
@@ -22,17 +26,13 @@ export const GetAllHeroes = () => {
     setHero(allHeroes)
   }
 
-  const [heroes, setHero] = useState([])
+
 
   useEffect(() => {
 
-    getHeroes();
-
-  
+    getHeroes(); 
 
   }, [heroes])
-
-
 
   let index
 
@@ -61,19 +61,17 @@ export const GetAllHeroes = () => {
 
     <div className='containerHeroes' >
 
-      <h1 className='mt-1'>All Hereos</h1>
+      <h1 className='mt-1'>All Hereos  </h1>
 
       {showAlert ? <Alert name={heroId} type={'danger'} /> : null}
 
-      {  heroes.length == 0 ?  <Alert type={'warning'} />   :  null     }
+      {  heroes.length == 0 ?  <Alert type={'warning'} />   :      null  }
 
           <div className='row heroCard'>
             {
               heroes.map((hero) => (
                 <Heroes
-
-                  key={hero.idCategory}
-
+                  key={hero._id}
                   {...hero}
 
                   handleDeleteByID={handleDeleteByID}
@@ -83,6 +81,7 @@ export const GetAllHeroes = () => {
             }
 
           </div>
+          
     </div>
   )
 }

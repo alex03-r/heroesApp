@@ -4,12 +4,13 @@ import { Link } from 'react-router-dom'
 
 import '../styles/card.css'
 
-export const Heroes = ({ _id, idCategory, superHero, publisher, character, age, handleDeleteByID , handleUpdateById}) => {
+export const Heroes = ({ _id, superHero, publisher, character, age, handleDeleteByID , handleUpdateById}) => {
+
 
     return (        
         
             <div className="card"  >               
-                    <img src={require(`../../public/img/${idCategory}.jpg`)} className="card-img " alt="superman" />
+                    {/* <img src={require(`../../public/img/${idCategory}.jpg`)} className="card-img " alt="superman" /> */}
                     <button type="button" class="btn-close img" onClick={() => handleDeleteByID(_id)} data-bs-dismiss="alert" aria-label="Close"></button>
 
                     <div className="card-body">
