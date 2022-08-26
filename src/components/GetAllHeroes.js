@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect, useLayoutEffect, useContext } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Heroes } from './Heroes';
 import { deleteHero } from '../helper/deleteHero';
 
@@ -16,7 +16,7 @@ export const GetAllHeroes = () => {
   const [heroes, setHero] = useState([])
 
   // const { first } = useContext( HeroContex )
-
+  const { dataFromCloud } = useContext(HeroContex);
   //react-hero
   const getHeroes = async () => {
 
@@ -24,6 +24,7 @@ export const GetAllHeroes = () => {
     const { allHeroes } = await res.json();
 
     setHero(allHeroes)
+    
   }
 
 
@@ -62,6 +63,7 @@ export const GetAllHeroes = () => {
     <div className='containerHeroes' >
 
       <h1 className='mt-1'>All Hereos  </h1>
+      <p>{ JSON.stringify( dataFromCloud )}</p>
 
       {showAlert ? <Alert name={heroId} type={'danger'} /> : null}
 
