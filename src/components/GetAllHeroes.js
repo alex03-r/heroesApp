@@ -15,25 +15,21 @@ export const GetAllHeroes = () => {
   const [heroId, setheroId] = useState('')
   const [heroes, setHero] = useState([])
 
-  // const { first } = useContext( HeroContex )
-  const { dataFromCloud } = useContext(HeroContex);
   //react-hero
   const getHeroes = async () => {
 
     const res = await fetch("http://localhost:4000/api");
     const { allHeroes } = await res.json();
-
     setHero(allHeroes)
     
   }
-
 
 
   useEffect(() => {
 
     getHeroes(); 
 
-  }, [heroes])
+  }, [])
 
   let index
 
@@ -63,7 +59,6 @@ export const GetAllHeroes = () => {
     <div className='containerHeroes' >
 
       <h1 className='mt-1'>All Hereos  </h1>
-      <p>{ JSON.stringify( dataFromCloud )}</p>
 
       {showAlert ? <Alert name={heroId} type={'danger'} /> : null}
 
@@ -75,9 +70,7 @@ export const GetAllHeroes = () => {
                 <Heroes
                   key={hero._id}
                   {...hero}
-
                   handleDeleteByID={handleDeleteByID}
-
                 />))
 
             }

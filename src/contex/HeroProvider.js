@@ -1,32 +1,19 @@
 
 import { HeroContex } from './HeroContex'
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 
 export function HeroProvider( { children } ){
 
-    const [imgUpload, setimgUpload] = useState(null);
     const [showAlert, setshowAlert] = useState(false);
-    const [url, setUrl] = useState('')
   
-    const [formValue, setformValue] = useState({
-      superHero: '',
-      publisher: '',
-      character: '',
-      age: 0,
-      imgUrl:''
-    
-    })
-  
-    const handleInputChange = ({ target }) => {
-  
-      setformValue({
-        ...formValue,
-        [target.name]: target.type == 'number' ? parseInt(target.value) : target.value,
-        imgUrl:""
-     
-      })
-  
-    }
+    const superHero = useRef()
+    const publisher = useRef()
+    const character = useRef()
+    const age = useRef()
+    const imgUrl = useRef()
+
+    let payload = {}
+
 
     const handleAlert = () => {
 
@@ -38,12 +25,12 @@ export function HeroProvider( { children } ){
       }
     
 
-    async   function uploadImg(){
+    async  function uploadImg(){
 
         const imgFormData = new FormData();
         imgFormData.append('upload_preset','react-heroes');
-        imgFormData.append('file', imgUpload);    
-      
+        imgFormData.append('file', imgUrl.current.files[0] );  
+       
         const cloudPayload = {
           method:'POST',
             body: imgFormData            
@@ -51,44 +38,41 @@ export function HeroProvider( { children } ){
 
         const responseCloud = await fetch('https://api.cloudinary.com/v1_1/dlsc2062n/upload', cloudPayload );     
         const dataCloud = await responseCloud.json(); 
-        console.log(dataCloud.secure_url)
-        setUrl(dataCloud.secure_url);
-      
-        // return  dataCloud.secure_url
+        
+        payload = {
+
+          superHero: superHero.current.value,
+          publisher: publisher.current.value,
+          character:character.current.value,
+          age: parseInt(age.current.value),
+          imgUrl:dataCloud.secure_url
+          
+        }
+          
+        return payload ;
+
       }
 
 
-    async function callingTwoApi(){
-       
-     
-
-        // handleInputChange( { target , url}  )
-
-        // setformValue({
-        //   ...formValue,
-        //   imgUrl:url
-        // })
+    async function addHeroCall(payload){       
 
          const heroPayload = {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'},
-          body: JSON.stringify(formValue)
-        }      
+          body: JSON.stringify(payload)
+        }            
 
         const response = await fetch("http://localhost:4000/api", heroPayload);
         const heroData = await response.json();
-        // console.log( formValue )
-        //  twoCalls = await Promise.all([response.json() , responseCloud.json() ]);
-     
-       
-      
-    }
+         
+        //  twoCalls = await Promise.all([response.json() , responseCloud.json() ]);   
+        }
 
 
     return(
 
-        <HeroContex.Provider value={ {formValue, handleInputChange, setformValue, imgUpload,  callingTwoApi , setimgUpload, imgUpload, showAlert ,  handleAlert  , uploadImg , url } } >
+        <HeroContex.Provider value={ {superHero,publisher ,  character, age, imgUrl,  addHeroCall , showAlert ,  handleAlert  , uploadImg  } } >
 
               { children}
 
