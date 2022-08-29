@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 import '../styles/card.css'
 
-export const Heroes = ({ _id, superHero, publisher, character, age, imgUrl,  handleDeleteByID }) => {
+export const Heroes = ({ _id,  superHero, publisher, character, age, imgUrl,  handleDeleteByID }) => {
 
 
     return (        

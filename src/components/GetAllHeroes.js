@@ -2,28 +2,38 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { Heroes } from './Heroes';
 import { deleteHero } from '../helper/deleteHero';
-
+import { HeroContex } from '../contex/HeroContex';
 import '../styles/card.css'
 import { Alert } from './Alert';
-// import { HeroContex } from '../contex/HeroContex';
+
 export const GetAllHeroes = () => {
 
 
-  const [showAlert, setshowAlert] = useState(false)
-  const [heroId, setheroId] = useState('')
-  const [heroes, setHero] = useState([])
+  const [showAlert, setshowAlert] = useState(false);
+  const [heroId, setheroId] = useState('');
+  const [heroes, setHeroes] = useState([]);
+
+   const { getHeroes } =  useContext( HeroContex );
 
   //react-hero
-  const getHeroes = async () => {
-    const res = await fetch("http://localhost:4000/api");
-    const { allHeroes } = await res.json();
-    setHero(allHeroes);    
-  }
-
+  // const getHeroes = async () => {
+  //   const res = await fetch("http://localhost:4000/api");
+  //   const { allHeroes } = await res.json();
+  //   setHero(allHeroes);    
+  // }     
 
   useEffect(() => {
 
-    getHeroes(); 
+     async function haveheroes(){
+
+         let heroes = await getHeroes();
+         setHeroes(heroes)
+
+      }
+
+      haveheroes()
+
+    console.log('jolll');
 
   }, [])
 
@@ -33,16 +43,7 @@ export const GetAllHeroes = () => {
 
   const handleDeleteByID = (id) => {
 
-    console.log("helloo");
-    // let splitedImg = imgId.split('/');
-
-    // let pubicId = splitedImg[ splitedImg.length - 1];
-
-    // let real = `heroes/${pubicId}`;
-
-    // let final =  real.substring(0 , real.length - 4);
-
-    deleteHero( id )
+     deleteHero( id )
 
     index = heroes.find(e => e._id === id)
 
@@ -72,15 +73,14 @@ export const GetAllHeroes = () => {
 
           <div className='row heroCard'>
             {
-              heroes.map((hero) => (
-                <Heroes
-                  key={hero._id}
-                  {...hero}
-                  handleDeleteByID={handleDeleteByID}
-                />))
-
+                heroes.map((hero) => (
+                      <Heroes
+                        key={hero._id}
+                        {...hero}
+                        handleDeleteByID={handleDeleteByID}
+                      />
+                  ))
             }
-
           </div>
           
     </div>

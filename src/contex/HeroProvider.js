@@ -5,6 +5,7 @@ import { useRef, useState } from 'react'
 export function HeroProvider( { children } ){
 
     const [showAlert, setshowAlert] = useState(false);
+ 
   
     const superHero = useRef()
     const publisher = useRef()
@@ -12,7 +13,7 @@ export function HeroProvider( { children } ){
     const age = useRef()
     const imgUrl = useRef()
 
-    let payload = {}
+   let payload = {}
 
 
     const handleAlert = () => {
@@ -38,7 +39,8 @@ export function HeroProvider( { children } ){
 
         const responseCloud = await fetch('https://api.cloudinary.com/v1_1/dlsc2062n/upload', cloudPayload );     
         const dataCloud = await responseCloud.json(); 
-        
+
+              
         payload = {
           superHero: superHero.current.value,
           publisher: publisher.current.value,
@@ -67,10 +69,17 @@ export function HeroProvider( { children } ){
         //  twoCalls = await Promise.all([response.json() , responseCloud.json() ]);   
         }
 
+      async function getHeroes(){
+
+        const response = await fetch("http://localhost:4000/api");
+        const { allHeroes } = await response.json();
+        return  allHeroes;
+      }
+
 
     return(
 
-        <HeroContex.Provider value={ {superHero,publisher ,  character, age, imgUrl,  addHeroCall , showAlert ,  handleAlert  , uploadImg  } } >
+        <HeroContex.Provider value={ {superHero,publisher ,  character, age, imgUrl,  addHeroCall , showAlert ,  handleAlert  , uploadImg , getHeroes } } >
 
               { children}
 
