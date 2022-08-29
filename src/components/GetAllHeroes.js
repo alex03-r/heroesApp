@@ -5,9 +5,7 @@ import { deleteHero } from '../helper/deleteHero';
 
 import '../styles/card.css'
 import { Alert } from './Alert';
-import { HeroContex } from '../contex/HeroContex';
-
-
+// import { HeroContex } from '../contex/HeroContex';
 export const GetAllHeroes = () => {
 
 
@@ -17,11 +15,9 @@ export const GetAllHeroes = () => {
 
   //react-hero
   const getHeroes = async () => {
-
     const res = await fetch("http://localhost:4000/api");
     const { allHeroes } = await res.json();
-    setHero(allHeroes)
-    
+    setHero(allHeroes);    
   }
 
 
@@ -33,10 +29,20 @@ export const GetAllHeroes = () => {
 
   let index
 
+//https://api.cloudinary.com/v1_1/{{cloud_name}}/:resource_type/destroy
 
   const handleDeleteByID = (id) => {
 
-    deleteHero(id)
+    console.log("helloo");
+    // let splitedImg = imgId.split('/');
+
+    // let pubicId = splitedImg[ splitedImg.length - 1];
+
+    // let real = `heroes/${pubicId}`;
+
+    // let final =  real.substring(0 , real.length - 4);
+
+    deleteHero( id )
 
     index = heroes.find(e => e._id === id)
 

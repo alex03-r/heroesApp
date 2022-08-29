@@ -40,13 +40,11 @@ export function HeroProvider( { children } ){
         const dataCloud = await responseCloud.json(); 
         
         payload = {
-
           superHero: superHero.current.value,
           publisher: publisher.current.value,
           character:character.current.value,
           age: parseInt(age.current.value),
-          imgUrl:dataCloud.secure_url
-          
+          imgUrl:dataCloud.secure_url          
         }
           
         return payload ;
