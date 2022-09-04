@@ -6,25 +6,27 @@ export const HeroUpdate = () => {
 
     const { id } = useParams();
 
-    const [heroByid, setheroByid] = useState({})
+    const [heroes, setHeroes] = useState({})
     const [showalert, setshowalert] = useState(false)
 
     const getHeroesToUpdate = async () => {
 
         const response = await fetch(`http://localhost:4000/api/${id}`);
         const data = await response.json();
-        setheroByid(data)
+        setHeroes(data)
     }
 
     useEffect(() => {
+
         getHeroesToUpdate();
+
     }, [])
 
     const { superHero, publisher, character, age } = heroByid;
 
     const handleInputUpdate = (e) => {
-        setheroByid({
-            ...heroByid,
+        setHeroes({
+            ...heroes,
             [e.target.name]: e.target.value
         })
     }
@@ -37,7 +39,7 @@ export const HeroUpdate = () => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(heroByid)
+            body: JSON.stringify(heroes)
         })
         const response = await request.json();
 
@@ -57,10 +59,7 @@ export const HeroUpdate = () => {
 
         <div className='container w-75 justify-content-center'>
 
-            { showalert ? <Alert name={superHero} type={'info'} /> : null}
-
-            {/* <label for='hero' className='form-label'>Id Of category</label>
-            <input type='text' onChange={handleInputUpdate} value={idCategory} placeholder='new' name='idCategory' className='form-control' /> */}
+            { showalert ? <Alert name={superHero} type={'info'} /> : null}            
 
             <label for='hero' className='form-label'>Super Hero</label>
             <input type='text' onChange={handleInputUpdate} value={superHero} name='superHero' className='form-control' />

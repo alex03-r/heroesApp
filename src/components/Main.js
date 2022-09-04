@@ -1,12 +1,11 @@
 import React from 'react'
-import { Form } from './Form'
+import { AddForm } from './AddForm'
 
 export const Main = () => {
 
   return (
     <div>
-      <Form />
-
+      <AddForm />
     </div>
   )
 }

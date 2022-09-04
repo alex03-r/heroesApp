@@ -4,19 +4,24 @@ import { Alert } from './Alert'
 import { HeroContex } from '../contex/HeroContex'
 
 
-export const Form = () => {
+export const AddForm = () => {
 
   const { superHero , publisher ,character, addHeroCall , age, imgUrl,  uploadImg , showAlert,  handleAlert  } = useContext(HeroContex);
 
- 
 
   const handleAddHero = async  () => {
 
     let data  = await uploadImg() 
 
      addHeroCall(data); 
-    handleAlert();      
-    
+
+     handleAlert();      
+     
+     superHero.current.value = "";
+     publisher.current.value = "";
+     character.current.value = "";
+     age.current.value = "";
+     imgUrl.current.value = "";    
   }
 
   return (
