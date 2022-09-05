@@ -1,26 +1,39 @@
 
 
 .card{
+
+    box-shadow: 5px 5px 5px   rgba(156, 159, 159, 0.484); 
     width: 230px;
-    height: auto;
-    margin-left: 8px;
+    margin-left: 14px;
     padding: 0px;
     margin-top: 8px;
+    height: auto;
+}
+
+.card:hover{
+
+    transform: translateY(-3%);
 }
 
 .card-img{
     width: 100%;
-    height: 200px;
+    height: 30vh;
     margin-top: 0px;
     padding: 0px;
 }
 
 .card-body{
 
-    background-color: rgba(230, 236, 240, 0.484);
+    background-color: rgba(242, 246, 246, 0.484);
     font-size: medium;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+    /* align-self: center; */
     font-weight: 470;
-    height: 100%;    
+    height: 50%;    
     font-weight: bold;
 }
 
@@ -30,9 +43,12 @@
 
 .heroCard { 
     width:100% !important;
-    height: 100px !important;
+    /* height: 100px !important; */
     margin-top: 10px;
     cursor: pointer; 
+    margin-left: 0.2%;
+    margin-bottom: 5px;
+   
 }
 
 .containerSearch{
@@ -43,9 +59,10 @@
 }
 .containerHeroes{
 
-   
-    margin-left: 40px;
+    margin-left: 20px;
     margin-right: 20px;
+    margin-top: 1px;
+    margin-bottom: 18px;
  }
 
 .btnClose{
@@ -76,13 +93,3 @@ margin-top: 2px;
 margin-bottom: 8px;
 }
 
-/* .noHero{
-
-    margin: 400px;
-    margin-top: 800px;
-    height: 100vh;
-    width: 100%;
-
-
-
-} */

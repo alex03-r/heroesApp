@@ -6,10 +6,9 @@ import { Alert } from './Alert';
 export const EditHeroForm = () => {
 
     const { id } = useParams();
-    const {  uploadImg  , clearInputs , getHeroes , editHero } = useContext(HeroContex);
+    const {  uploadImg  , clearInputs , getHeroes , editHero , handleAlert, showalert } = useContext(HeroContex);
 
     const [heroes, setHeroes] = useState({});
-    const [showalert, setshowalert] = useState(false);
 
     const imgUrlRef = useRef();
     const superHeroRef = useRef();
@@ -29,6 +28,13 @@ export const EditHeroForm = () => {
     
 
     const onUpdate = async () => {
+
+        if(superHeroRef.current.value == "" ||  publisherRef.current.value == ""  || characterRef.current.value == "" ||  ageRef.current.value == ""  || imgUrlRef.current.value == ""   ) {
+
+            alert('Please fill out the fields');
+            clearInputs(imgUrlRef, superHeroRef, publisherRef, characterRef, ageRef);
+            return
+        }
          
         let url = await uploadImg(imgUrlRef);     
 
@@ -42,15 +48,7 @@ export const EditHeroForm = () => {
         }
 
         editHero(payload, id);
-
-        setshowalert(true)
-
-        setTimeout(() => {
-            setshowalert(false);
-     
-            
-        }, 1000);
-
+        handleAlert()
         clearInputs(imgUrlRef, superHeroRef, publisherRef, characterRef, ageRef);
     }
 

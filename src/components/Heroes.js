@@ -18,7 +18,7 @@ export const Heroes = ({ _id,  superHero, publisher, character, age, imgUrl,  ha
                         <p className="card-text">Publisher: {publisher}</p>
                         <p className="card-text">Character: {character}</p>
                         <p className="card-text">Age: {age}</p>
-                        <Link to={`/HeroUpdate/${_id}`} className='btn btn-info'>Update</Link>
+                        <Link to={`/HeroUpdate/${_id}`} className='btn btn-info'>Edit</Link>
                     </div>
                 
             </div>      

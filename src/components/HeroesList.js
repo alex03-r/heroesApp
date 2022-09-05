@@ -56,24 +56,24 @@ export const HeroesList = () => {
 
     <div className='containerHeroes' >
 
-              <h1 className='mt-1'>All Hereos  </h1>     
+            <h1 className=' text-center'>All Hereos  </h1>     
 
-              {showAlert ? <Alert  name={ superHero }   type={'danger'} /> : null}
+            {showAlert ? <Alert  name={ superHero }   type={'danger'} /> : null}
 
-              {heroes.length == 0 ?  <Alert type={'warning'} /> : null  }
+            {heroes.length == 0 ?  <Alert type={'warning'} /> : null  }
 
-              <div className='row heroCard'>
-                    {
-                            heroes.map((hero) => (
+            <div className='row  heroCard'>
+                  {
+                          heroes.map((hero) => (
 
-                                  <Heroes
-                                      key={hero._id}
-                                      {...hero}
-                                      handleDeleteHero={ handleDeleteHero }
-                                  />
-                              ))
-                    }
-              </div>
+                                <Heroes
+                                    key={hero._id}
+                                    {...hero}
+                                    handleDeleteHero={ handleDeleteHero }
+                                />
+                            ))
+                  }
+            </div>
           
     </div>
   )

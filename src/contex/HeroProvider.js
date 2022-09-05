@@ -10,7 +10,7 @@ export function HeroProvider( { children } ){
     const publisher = useRef()
     const character = useRef()
     const age = useRef()
-    const imgUrl = useRef()
+    const imgUrlRef = useRef()
 
     function clearInputs(...inputsRefs){
 
@@ -94,44 +94,42 @@ export function HeroProvider( { children } ){
  
  }
 
-      async function getHeroes(id){
+  async function getHeroes(id){
 
         if(id == 0 ){
 
           try {
 
-            const response = await fetch("http://localhost:4000/api");
-            const { allHeroes } = await response.json();
-            return  allHeroes; 
+                const response = await fetch("http://localhost:4000/api");
+                const { allHeroes } = await response.json();
+                return  allHeroes; 
             
           } catch (error) {
 
-            console.log(error)            
+              console.log(error)            
           }     
 
         }
 
         try {
 
-          const response = await fetch(`http://localhost:4000/api/${id}`);
+            const response = await fetch(`http://localhost:4000/api/${id}`);
 
-          const { Hero } = await response.json();
-          return Hero
+            const { Hero } = await response.json();
+            return Hero
           
         } catch (error) {
 
-          console.log(error)          
-        }
-
-    
+            console.log(error)          
+        }   
       
   
-      }
+   }
 
 
     return(
 
-        <HeroContex.Provider value={ {superHero,publisher , clearInputs ,  character, age, imgUrl,  addHero , showAlert ,  handleAlert  , uploadImg , getHeroes , editHero, deleteHero } } >
+        <HeroContex.Provider value={ {superHero,publisher , clearInputs ,  character, age, imgUrlRef,  addHero , showAlert ,  handleAlert  , uploadImg , getHeroes , editHero, deleteHero } } >
 
               { children}
 
