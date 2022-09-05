@@ -13,9 +13,15 @@ export function HeroProvider( { children } ){
     const age = useRef()
     const imgUrl = useRef()
 
-   let payload = {}
+    function clearInputs(...refs){
 
+      refs.forEach(inputs => {
 
+        inputs.current.value = "";
+      })
+    }
+
+   
     const handleAlert = () => {
 
         setshowAlert(true)
@@ -26,7 +32,7 @@ export function HeroProvider( { children } ){
       }
     
 
-    async  function uploadImg(){
+    async  function uploadImg(imgUrl){
 
         const imgFormData = new FormData();
         imgFormData.append('upload_preset','react-heroes');
@@ -38,19 +44,9 @@ export function HeroProvider( { children } ){
         }
 
         const responseCloud = await fetch('https://api.cloudinary.com/v1_1/dlsc2062n/upload', cloudPayload );     
-        const dataCloud = await responseCloud.json(); 
+        const dataCloud = await responseCloud.json();           
 
-              
-        payload = {
-          superHero: superHero.current.value,
-          publisher: publisher.current.value,
-          character:character.current.value,
-          age: parseInt(age.current.value),
-          imgUrl:dataCloud.secure_url          
-        }
-          
-        return payload ;
-
+        return dataCloud.secure_url ;
       }
 
 
@@ -79,7 +75,7 @@ export function HeroProvider( { children } ){
 
     return(
 
-        <HeroContex.Provider value={ {superHero,publisher ,  character, age, imgUrl,  addHeroCall , showAlert ,  handleAlert  , uploadImg , getHeroes } } >
+        <HeroContex.Provider value={ {superHero,publisher , clearInputs ,  character, age, imgUrl,  addHeroCall , showAlert ,  handleAlert  , uploadImg , getHeroes } } >
 
               { children}
 

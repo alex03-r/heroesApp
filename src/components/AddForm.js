@@ -6,22 +6,38 @@ import { HeroContex } from '../contex/HeroContex'
 
 export const AddForm = () => {
 
-  const { superHero , publisher ,character, addHeroCall , age, imgUrl,  uploadImg , showAlert,  handleAlert  } = useContext(HeroContex);
+  const { superHero , publisher ,character, addHeroCall , age, imgUrl,  uploadImg , showAlert,  handleAlert , clearInputs } = useContext(HeroContex);
 
 
   const handleAddHero = async  () => {
 
-    let data  = await uploadImg() 
+    if(superHero.current.value == "" ||  publisher.current.value == ""  || character.current.value == "" ||  age.current.value == ""  || imgUrl.current.value == ""   ) {
 
-     addHeroCall(data); 
+      alert('please fill out the inputs');
+     
+      clearInputs(superHero, publisher, character, age, imgUrl );
+
+      return
+    }
+
+    let data  = await uploadImg(imgUrl);
+
+
+    let payload = {
+
+      superHero: superHero.current.value,
+      publisher: publisher.current.value,
+      character:character.current.value,
+      age: parseInt(age.current.value),
+      imgUrl:data        
+    }
+
+     addHeroCall(payload); 
 
      handleAlert();      
      
-     superHero.current.value = "";
-     publisher.current.value = "";
-     character.current.value = "";
-     age.current.value = "";
-     imgUrl.current.value = "";    
+     clearInputs(superHero, publisher, character, age, imgUrl );
+
   }
 
   return (
@@ -31,9 +47,9 @@ export const AddForm = () => {
 
       {showAlert ? <Alert name={superHero.current.value} type={'success'} /> : null}
     
-      <label for='hero' className='form-label'>Id Of category</label>
+      <label for='hero' className='form-label'>Image of Hero</label>
       {/* //(e) => setimgUpload(e.target.files[0]) ref={ imgRef } */} 
-      <input type='file'  ref={imgUrl} className='form-control' />
+      <input type='file'  ref={imgUrl}  className='form-control' />
 
       <label for='hero' className='form-label'>Super Hero</label>
       {/* //onChange={handleInputChange} value={superHero} */}
