@@ -3,43 +3,40 @@ import { useParams } from 'react-router-dom';
 import { HeroContex } from '../contex/HeroContex';
 import { Alert } from './Alert';
 
-export const HeroUpdate = () => {
+export const EditHeroForm = () => {
 
     const { id } = useParams();
-
     const {  uploadImg  , clearInputs } = useContext(HeroContex);
 
-    const [heroes, setHeroes] = useState({})
-    const [showalert, setshowalert] = useState(false)
-
-    const getHeroesToUpdate = async () => {
-
-        const response = await fetch(`http://localhost:4000/api/${id}`);
-        const data = await response.json();
-        setHeroes(data)
-
-         
-    }
-
-    const { superHero, publisher , character, age  } = heroes;
-    useEffect(() => {
-
-        getHeroesToUpdate();
-      
-
-
-    }, [])
+    const [heroes, setHeroes] = useState({});
+    const [showalert, setshowalert] = useState(false);
 
     const imgUrlRef = useRef();
     const superHeroRef = useRef();
     const publisherRef = useRef();
     const characterRef = useRef();
     const ageRef = useRef();
-  
-   
+
+    const getHeroesToUpdate = async () => {
+
+        const response = await fetch(`http://localhost:4000/api/${id}`);
+        const data = await response.json();
+        setHeroes(data)         
+    }
+
+
+    const { superHero, publisher , character, age  } = heroes;
+
+    useEffect(() => {
+
+        getHeroesToUpdate();  
+
+    }, [])
+
+ 
+    
 
     const onUpdate = async () => {
-
          
         let url = await uploadImg(imgUrlRef);     
 
@@ -60,6 +57,7 @@ export const HeroUpdate = () => {
             },
             body: JSON.stringify(payload)
         })
+
         const response = await request.json();
 
         setshowalert(true)
@@ -67,6 +65,7 @@ export const HeroUpdate = () => {
         setTimeout(() => {
 
             setshowalert(false);
+            
             clearInputs(imgUrlRef, superHeroRef, publisherRef, characterRef, ageRef)
             
         }, 3000);

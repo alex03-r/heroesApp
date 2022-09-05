@@ -1,12 +1,12 @@
 import React, { useContext } from 'react'
-import '../styles/card.css'
 import { Alert } from './Alert'
 import { HeroContex } from '../contex/HeroContex'
+import '../styles/card.css'
 
 
-export const AddForm = () => {
+export const AddHeroForm = () => {
 
-  const { superHero , publisher ,character, addHeroCall , age, imgUrl,  uploadImg , showAlert,  handleAlert , clearInputs } = useContext(HeroContex);
+  const { superHero , publisher ,character, addHero , age, imgUrl,  uploadImg , showAlert,  handleAlert , clearInputs } = useContext(HeroContex);
 
 
   const handleAddHero = async  () => {
@@ -20,20 +20,18 @@ export const AddForm = () => {
       return
     }
 
-    let data  = await uploadImg(imgUrl);
-
+    let url  = await uploadImg(imgUrl);
 
     let payload = {
-
       superHero: superHero.current.value,
       publisher: publisher.current.value,
       character:character.current.value,
       age: parseInt(age.current.value),
-      imgUrl:data        
+      imgUrl:url        
     }
 
-     addHeroCall(payload); 
-
+     addHero(payload); 
+ 
      handleAlert();      
      
      clearInputs(superHero, publisher, character, age, imgUrl );
@@ -48,11 +46,11 @@ export const AddForm = () => {
       {showAlert ? <Alert name={superHero.current.value} type={'success'} /> : null}
     
       <label for='hero' className='form-label'>Image of Hero</label>
-      {/* //(e) => setimgUpload(e.target.files[0]) ref={ imgRef } */} 
+    
       <input type='file'  ref={imgUrl}  className='form-control' />
 
       <label for='hero' className='form-label'>Super Hero</label>
-      {/* //onChange={handleInputChange} value={superHero} */}
+    
       <input type='text' ref={superHero} placeholder='name' name='superHero' className='form-control' />
 
       <label for='Publisher' className='form-label'>Publisher</label>

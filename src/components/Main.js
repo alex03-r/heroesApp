@@ -1,11 +1,11 @@
 import React from 'react'
-import { AddForm } from './AddForm'
+import { AddHeroForm } from './AddHeroForm'
 
 export const Main = () => {
 
   return (
     <div>
-      <AddForm />
+      <AddHeroForm />
     </div>
   )
 }

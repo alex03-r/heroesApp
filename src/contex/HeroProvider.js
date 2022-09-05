@@ -25,7 +25,9 @@ export function HeroProvider( { children } ){
     const handleAlert = () => {
 
         setshowAlert(true)
+
         setTimeout(() => {
+
           setshowAlert(false)
         }, 3000);
     
@@ -50,7 +52,7 @@ export function HeroProvider( { children } ){
       }
 
 
-    async function addHeroCall(payload){       
+    async function addHero(payload){       
 
          const heroPayload = {
           method: 'POST',
@@ -75,7 +77,7 @@ export function HeroProvider( { children } ){
 
     return(
 
-        <HeroContex.Provider value={ {superHero,publisher , clearInputs ,  character, age, imgUrl,  addHeroCall , showAlert ,  handleAlert  , uploadImg , getHeroes } } >
+        <HeroContex.Provider value={ {superHero,publisher , clearInputs ,  character, age, imgUrl,  addHero , showAlert ,  handleAlert  , uploadImg , getHeroes } } >
 
               { children}
 
