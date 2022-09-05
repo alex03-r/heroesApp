@@ -7,8 +7,8 @@ import '../styles/card.css'
 export const Heroes = ({ _id,  superHero, publisher, character, age, imgUrl,  handleDeleteHero }) => {
 
 
-    return (        
-        // , imgUrl
+    return (       
+  
             <div className="card"  >               
                     <img src={imgUrl} className="card-img " />
                     <button type="button" class="btn-close img" onClick={() => handleDeleteHero( _id )} data-bs-dismiss="alert" aria-label="Close"></button>

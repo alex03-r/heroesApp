@@ -6,7 +6,7 @@ import { Alert } from './Alert';
 export const EditHeroForm = () => {
 
     const { id } = useParams();
-    const {  uploadImg  , clearInputs } = useContext(HeroContex);
+    const {  uploadImg  , clearInputs , getHeroes , editHero } = useContext(HeroContex);
 
     const [heroes, setHeroes] = useState({});
     const [showalert, setshowalert] = useState(false);
@@ -15,25 +15,17 @@ export const EditHeroForm = () => {
     const superHeroRef = useRef();
     const publisherRef = useRef();
     const characterRef = useRef();
-    const ageRef = useRef();
+    const ageRef = useRef(); 
+ 
 
-    const getHeroesToUpdate = async () => {
-
-        const response = await fetch(`http://localhost:4000/api/${id}`);
-        const data = await response.json();
-        setHeroes(data)         
-    }
-
-
-    const { superHero, publisher , character, age  } = heroes;
-
-    useEffect(() => {
-
-        getHeroesToUpdate();  
+    useEffect(() => { 
+     
+        getHeroes(id)
+          .then(data => setHeroes(data) )
 
     }, [])
 
- 
+    const { superHero, publisher , character, age  } = heroes;
     
 
     const onUpdate = async () => {
@@ -41,7 +33,7 @@ export const EditHeroForm = () => {
         let url = await uploadImg(imgUrlRef);     
 
         const payload = {
-
+            
             superHero: superHeroRef.current.value,
             publisher: publisherRef.current.value,
             character: characterRef.current.value,
@@ -49,29 +41,17 @@ export const EditHeroForm = () => {
             imgUrl: url
         }
 
-
-        const request = await fetch(`http://localhost:4000/api/${id}`, {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(payload)
-        })
-
-        const response = await request.json();
+        editHero(payload, id);
 
         setshowalert(true)
 
         setTimeout(() => {
-
             setshowalert(false);
+     
             
-            clearInputs(imgUrlRef, superHeroRef, publisherRef, characterRef, ageRef)
-            
-        }, 3000);
+        }, 1000);
 
-
-
+        clearInputs(imgUrlRef, superHeroRef, publisherRef, characterRef, ageRef);
     }
 
 

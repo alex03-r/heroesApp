@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useContext } from 'react'
 import { Heroes } from './Heroes';
-import { deleteHero } from '../helper/deleteHero';
+
 import { HeroContex } from '../contex/HeroContex';
 import '../styles/card.css'
 import { Alert } from './Alert';
@@ -12,12 +12,12 @@ export const HeroesList = () => {
   const [superHero, setSuperHero] = useState('');
   const [heroes, setHeroes] = useState([]);
 
-   const { getHeroes } =  useContext( HeroContex );
+   const { getHeroes, deleteHero } =  useContext( HeroContex );
 
   //react-hero
   
    function obtainHeroes(){
-    getHeroes()
+    getHeroes(0)
     .then(heroes => setHeroes(heroes) )   
  }
 
@@ -34,7 +34,7 @@ export const HeroesList = () => {
 
      deleteHero( id )  
     
-     heroSelected = heroes.find(e => e._id === id);
+    heroSelected = heroes.find(e => e._id === id);
 
     const { superHero } = heroSelected;
 
@@ -45,9 +45,10 @@ export const HeroesList = () => {
     setTimeout(() => {
 
       setshowAlert(false)
+      obtainHeroes();      
     }, 1000)
 
-    obtainHeroes();
+  
 
   }
 

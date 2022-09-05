@@ -4,8 +4,7 @@ import { useRef, useState } from 'react'
 
 export function HeroProvider( { children } ){
 
-    const [showAlert, setshowAlert] = useState(false);
- 
+    const [showAlert, setshowAlert] = useState(false); 
   
     const superHero = useRef()
     const publisher = useRef()
@@ -13,12 +12,14 @@ export function HeroProvider( { children } ){
     const age = useRef()
     const imgUrl = useRef()
 
-    function clearInputs(...refs){
+    function clearInputs(...inputsRefs){
 
-      refs.forEach(inputs => {
+      inputsRefs.forEach(inputs => {
 
-        inputs.current.value = "";
+          inputs.current.value = "";
+
       })
+
     }
 
    
@@ -54,30 +55,83 @@ export function HeroProvider( { children } ){
 
     async function addHero(payload){       
 
-         const heroPayload = {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'},
-          body: JSON.stringify(payload)
-        }            
+          const heroPayload = {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'},
+            body: JSON.stringify(payload)
+          }            
 
-        const response = await fetch("http://localhost:4000/api", heroPayload);
-        const heroData = await response.json();
-         
-        //  twoCalls = await Promise.all([response.json() , responseCloud.json() ]);   
+          const response = await fetch("http://localhost:4000/api", heroPayload);
+          const heroData = await response.json();
+          
+     }
+
+     async function editHero(payload , id){
+
+      const request = await fetch(`http://localhost:4000/api/${id}`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    })
+
+    const response = await request.json();
+
+   }
+
+  async  function deleteHero(id){    
+    ///${publicid
+     const response = await fetch(`http://localhost:4000/api/${id}`, {       
+         method:'DELETE',
+         headers: {
+             'Content-type':'application/json'
+         }
+     })
+ 
+     const data = await response.json();
+ 
+ }
+
+      async function getHeroes(id){
+
+        if(id == 0 ){
+
+          try {
+
+            const response = await fetch("http://localhost:4000/api");
+            const { allHeroes } = await response.json();
+            return  allHeroes; 
+            
+          } catch (error) {
+
+            console.log(error)            
+          }     
+
         }
 
-      async function getHeroes(){
+        try {
 
-        const response = await fetch("http://localhost:4000/api");
-        const { allHeroes } = await response.json();
-        return  allHeroes;
+          const response = await fetch(`http://localhost:4000/api/${id}`);
+
+          const { Hero } = await response.json();
+          return Hero
+          
+        } catch (error) {
+
+          console.log(error)          
+        }
+
+    
+      
+  
       }
 
 
     return(
 
-        <HeroContex.Provider value={ {superHero,publisher , clearInputs ,  character, age, imgUrl,  addHero , showAlert ,  handleAlert  , uploadImg , getHeroes } } >
+        <HeroContex.Provider value={ {superHero,publisher , clearInputs ,  character, age, imgUrl,  addHero , showAlert ,  handleAlert  , uploadImg , getHeroes , editHero, deleteHero } } >
 
               { children}
 
