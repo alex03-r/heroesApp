@@ -3,6 +3,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import { Heroes } from './Heroes';
 
 import { HeroContex } from '../contex/HeroContex';
+import { AddHeroForm } from './AddHeroForm';
 import '../styles/card.css'
 import { Alert } from './Alert';
 
@@ -11,6 +12,7 @@ export const HeroesList = () => {
   const [showAlert, setshowAlert] = useState(false);
   const [superHero, setSuperHero] = useState('');
   const [heroes, setHeroes] = useState([]);
+  const [canAddHero, setcanAddHero] = useState(false);
 
    const { getHeroes, deleteHero } =  useContext( HeroContex );
 
@@ -25,7 +27,7 @@ export const HeroesList = () => {
 
     obtainHeroes();
 
-  },[]) 
+  },[ canAddHero ]) 
 
 
   let heroSelected
@@ -54,25 +56,38 @@ export const HeroesList = () => {
 
   return (
 
-    <div className='containerHeroes' >
+    <div className='containerHeroes'  style={{position:"relative"}} >
 
-            <h1 className=' text-center'>All Hereos  </h1>     
-
+            <div className=' d-flex  justify-content-between' >
+              <div className=' w-100 text-center'>
+                <h1 className=''>All Hereos  </h1>    
+              </div>
+              <button className='btn btn-primary btn-sm me-3' onClick={() => setcanAddHero(true)} >+Add hero</button> 
+            </div>
             {showAlert ? <Alert  name={ superHero }   type={'danger'} /> : null}
 
-            {heroes.length == 0 ?  <Alert type={'warning'} /> : null  }
+            { heroes.length == 0 ?  <Alert type={'warning'} /> : null  }
 
-            <div className='row  heroCard'>
+            {    canAddHero && <AddHeroForm setcanAddHero={setcanAddHero} /> }
+
+            <div className='row justify-content-center   heroCard' >
+
+           
                   {
-                          heroes.map((hero) => (
+                      heroes.map((hero) => (
 
-                                <Heroes
-                                    key={hero._id}
-                                    {...hero}
-                                    handleDeleteHero={ handleDeleteHero }
-                                />
-                            ))
+                        
+                            <Heroes
+                                key={hero._id}
+                                {...hero}
+                                handleDeleteHero={ handleDeleteHero }
+                            />
+                        ))
+
+                 
                   }
+
+              
             </div>
           
     </div>

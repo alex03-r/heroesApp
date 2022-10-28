@@ -8,6 +8,9 @@
     padding: 0px;
     margin-top: 8px;
     height: auto;
+    border: none;
+    border-width: 4px;
+    border-color: #fff;
 }
 
 .card:hover{
@@ -57,12 +60,14 @@
    margin-left: 40px;
    margin-right: 40px;
 }
-.containerHeroes{
-
-    margin-left: 20px;
+.containerHeroes{    
+    /* margin-left: 20px;
     margin-right: 20px;
-    margin-top: 1px;
-    margin-bottom: 18px;
+    margin-top: 1px;*/
+    margin-top: 0px;
+     margin-bottom: 18px; 
+     height: 100vh;
+ 
  }
 
 .btnClose{

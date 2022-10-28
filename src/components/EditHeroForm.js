@@ -6,6 +6,7 @@ import { Alert } from './Alert';
 export const EditHeroForm = () => {
 
     const { id } = useParams();
+    
     const {  uploadImg  , clearInputs , getHeroes , editHero , handleAlert, showalert } = useContext(HeroContex);
 
     const [heroes, setHeroes] = useState({});
@@ -24,10 +25,9 @@ export const EditHeroForm = () => {
 
     }, [])
 
-    const { superHero, publisher , character, age  } = heroes;
-    
+    const { superHero, publisher , character, age  } = heroes;    
 
-    const onUpdate = async () => {
+     async  function onUpdate()  {
 
         if(superHeroRef.current.value == "" ||  publisherRef.current.value == ""  || characterRef.current.value == "" ||  ageRef.current.value == ""  || imgUrlRef.current.value == ""   ) {
 

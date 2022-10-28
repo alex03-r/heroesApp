@@ -9,12 +9,9 @@ export const HeroMain = () => {
 
   return (
 
-
      <HeroProvider>
            <AppRoute/>
       </HeroProvider>
- 
-
 
   )
 }

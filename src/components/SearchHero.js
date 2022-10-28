@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react'
-
 import { Heroes } from './Heroes'
 import { HeroContex } from '../contex/HeroContex';
-export const SearchHero = () => {
 
+export const SearchHero = () => {
 
     const [search, setsearch] = useState('');
     const [filterHero, setfilterHero] = useState([]);
+    const [heroFilterResult, setHeroFilterResult] = useState([])
 
     const { getHeroes } = useContext(HeroContex);
 
@@ -21,13 +21,9 @@ export const SearchHero = () => {
         setsearch(e.target.value)
     }
 
-    const [heroFilterResult, setHeroFilterResult] = useState([])
-
     const searchHero = () => {
 
         const filterResult = filterHero.filter(hero => hero.superHero.toLowerCase().includes(search.toLowerCase()))
-
-        console.log(filterResult)
         setHeroFilterResult(filterResult)
     }
 

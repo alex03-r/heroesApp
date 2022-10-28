@@ -9,7 +9,7 @@ export const Heroes = ({ _id,  superHero, publisher, character, age, imgUrl,  ha
 
     return (       
   
-            <div className="card"  >               
+            <div className="card shadow"  >               
                     <img src={imgUrl} className="card-img " />
                     <button type="button" class="btn-close img" onClick={() => handleDeleteHero( _id )} data-bs-dismiss="alert" aria-label="Close"></button>
 
